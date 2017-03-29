@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image } from 'react-native';
+import { Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
@@ -26,14 +26,14 @@ class LoginForm extends Component {
 
     return (
       <Button onPress={this.onButtonPress.bind(this)}>
-        Login
+        Create | Login
       </Button>
     );
   }
 
   render() {
     return (
-      <Image source={require('./common/signup.png')} style={styles.backgroundImage}>
+      <Image source={require('./common/images/main.png')} style={styles.backgroundImage}>
         <Card>
           <CardSection>
             <Input
@@ -61,6 +61,29 @@ class LoginForm extends Component {
           <CardSection>
             {this.renderButton()}
           </CardSection>
+
+          <CardSection>
+            <Text style={styles.or}>
+
+            </Text>
+          </CardSection>
+        </Card>
+        <Card>
+          <CardSection>
+            <TouchableOpacity style={styles.facebook} onClick={() => this.authenticate('facebook')} >
+              <Text style={styles.textStyle}>
+                Log In with Facebook
+              </Text>
+            </TouchableOpacity>
+          </CardSection>
+
+          <CardSection>
+            <TouchableOpacity style={styles.twitter} onClick={() => this.authenticate('twitter')} >
+              <Text style={styles.textStyle}>
+                Log In with Twitter
+              </Text>
+            </TouchableOpacity>
+          </CardSection>
         </Card>
       </Image>
 
@@ -78,6 +101,38 @@ const styles = {
     flex: 1,
     width: null,
     height: null
+  },
+  facebook: {
+    flex: 1,
+    alignSelf: 'stretch',
+    backgroundColor: '#3864a3',
+    borderRadius: 30,
+    borderWidth: 2,
+    width: 30,
+    borderColor: 'white',
+    marginLeft: 5,
+    paddingBottom: 10,
+    marginRight: 5
+  },
+  twitter: {
+    flex: 1,
+    alignSelf: 'stretch',
+    backgroundColor: '#0084b4',
+    borderRadius: 30,
+    borderWidth: 2,
+    width: 30,
+    borderColor: 'white',
+    marginLeft: 5,
+    paddingBottom: 10,
+    marginRight: 5
+  },
+  textStyle: {
+    alignSelf: 'center',
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+    paddingTop: 5,
+    paddingBottom: 5
   }
 };
 

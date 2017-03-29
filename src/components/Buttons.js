@@ -1,28 +1,12 @@
 import React from 'react';
-import { TouchableOpacity, Image, View, Text } from 'react-native';
+import { TouchableOpacity, Image, View } from 'react-native';
 
-const Buttons = () => {
-    const { addButton, subButton } = styles;
-    // constructor() {
-    //   super();
-    //   this.state = { taps: 0};
-    // }
-    //
-    // onAdd = () => {
-    //   this.setState({
-    //     taps: this.state.taps + 1
-    //   });
-    // }
+const Buttons = (props) => {
+    const { addButton, subButton, container } = styles;
     return (
-      <View>
-        {/* <Text>{this.state.taps}</Text> */}
-        <Text>height</Text>
-        <TouchableOpacity onPress={() => { this.onAdd() }} style={addButton}>
-            <Image source={require('./common/plus.png')} />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => { console.log('subtract'); }} style={subButton}>
-            <Image source={require('./common/minus.png')} />
+      <View style={container}>
+        <TouchableOpacity onPress={() => props.onPress()} style={props.add ? addButton : subButton}>
+            <Image source={props.image} />
         </TouchableOpacity>
       </View>
     );
@@ -30,15 +14,19 @@ const Buttons = () => {
 
 const styles = {
     addButton: {
-      top: 450,
+      top: 350,
       left: 50,
-      width: 105
+      width: 105,
+      // backgroundColor: 'blue'
     },
     subButton: {
-      top: 345,
-      left: 250,
-      width: 105
+      top: 245,
+      left: 260,
+      width: 105,
+      // backgroundColor: 'blue'
+    },
+    container: {
+      // backgroundColor: 'blue'
     }
 };
-
 export { Buttons };
