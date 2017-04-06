@@ -1,9 +1,11 @@
+// import _ from 'lodash'; //
 import React, { Component } from 'react';
+// import { connect } from 'react-redux';  //
 import { View, Image, Text } from 'react-native';
+// import { HeightActions } from '../actions' //
 import { Buttons } from './Buttons';
 import { StoreButton } from './StoreButton';
 import { numberWithCommas } from '../helpers';
-import firebase from 'firebase';
 
 class MainPage extends Component {
   constructor(props) {
@@ -12,30 +14,20 @@ class MainPage extends Component {
       wallHeight: 0,
       voteAdd: 0,
       voteSub: 0,
+      voteMult: 1,
       user: null
     };
     this.onAdd = this.onAdd.bind(this);
     this.onSubtract = this.onSubtract.bind(this);
-    this.firebase = firebase;
-    this.base = firebase.database();
-  }
-  getWallHeight() {
-    this.base.ref('wallHeight').on('value', (snap) => {
-      this.setState({ wallHeight: snap.val() });
-    }, err => console.log(err));
-  }
-  componentDidMount = () => {
-    this.getWallHeight();
-  }
-
+ }
   onAdd() {
     this.setState(prevState => {
-      return { wallHeight: prevState.wallHeight += 666, voteAdd: prevState.voteAdd + 666 };
+      return { wallHeight: prevState.wallHeight += 1, voteAdd: prevState.voteAdd + 1 };
     });
   }
   onSubtract() {
     this.setState(prevState => {
-      return { wallHeight: prevState.wallHeight -= 666, voteSub: prevState.voteSub -666 };
+      return { wallHeight: prevState.wallHeight -= 1, voteSub: prevState.voteSub -1 };
     });
   }
 
@@ -51,6 +43,9 @@ class MainPage extends Component {
           <Text style={styles.header}>Your Votes:</Text>
           <Text style={styles.yourVotes}>{numberWithCommas(this.state.voteAdd)} ft.</Text>
           <Text style={styles.yourVotes}>{numberWithCommas(this.state.voteSub)} ft.</Text>
+
+          <Text style={styles.header}>Vote Multiplier:</Text>
+          <Text style={styles.voteMult}>{numberWithCommas(this.state.voteMult)}</Text>
         </View>
         <StoreButton image={require('./common/images/appstore.png')} />
         <Buttons add={true} image={require('./common/images/plus.png')} onPress={this.onAdd} />
@@ -64,13 +59,11 @@ class MainPage extends Component {
 const styles = {
   headContainer: {
     marginLeft: 10,
-    top: 30,
-    // backgroundColor: 'red'
+    top: 30
   },
   textContainer: {
     top: 315,
-    marginLeft: 10,
-    // backgroundColor: 'red'
+    marginLeft: 10
   },
   header: {
     color: 'black',
@@ -93,19 +86,13 @@ const styles = {
     fontWeight: 'bold',
     color: 'white',
     marginLeft: 10
+  },
+  voteMult: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'yellow',
+    marginLeft: 10
   }
 };
 
 export default MainPage;
-
-//
-// getYourVotes(user) {
-//   this.base.ref(`users/${user.uid}`).on('value', (snap) => {
-//     this.setState({ yourVotes: { up: snap.val().up, down: snap.val().down } });
-//   }, err => console.log(err));
-// }
-//
-// changeUserState = (user) => {
-//   this.setState({ user: user });
-//   this.getYourVotes(user);
-// }

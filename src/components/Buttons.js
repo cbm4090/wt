@@ -14,13 +14,13 @@ const Buttons = (props) => {
 
 const styles = {
     addButton: {
-      top: 350,
+      top: 300,
       left: 50,
       width: 105,
       // backgroundColor: 'blue'
     },
     subButton: {
-      top: 245,
+      top: 200,
       left: 260,
       width: 105,
       // backgroundColor: 'blue'

@@ -16,11 +16,10 @@ const styles = {
     storeButton: {
       top: 250,
       left: 365,
-      width: 45,
-      // backgroundColor: 'red'
+      width: 45
     },
     container: {
-      // backgroundColor: 'red'
+
     }
 };
 export { StoreButton };

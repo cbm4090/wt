@@ -16,12 +16,12 @@ class App extends Component {
       storageBucket: 'walltap-f8489.appspot.com',
       messagingSenderId: '331388725629'
   };
-  firebase.initializeApp(config);
+
+firebase.initializeApp(config);
   }
 
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
     return (
       <Provider store={store}>
         <Router />
@@ -31,3 +31,12 @@ class App extends Component {
 }
 
 export default App;
+
+// const fb = firebase
+// .initializeApp(config)
+// .database()
+// .ref();
+// fb.on('value', snapshot => {
+//   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+//   snapshot.val();
+// })

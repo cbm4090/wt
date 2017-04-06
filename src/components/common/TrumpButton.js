@@ -1,11 +1,13 @@
 import React from 'react';
-import { TouchableOpacity, Image, View, Text } from 'react-native';
+import { TouchableOpacity, Image, View, Text, Alert } from 'react-native';
+
+const alertMessage = '---> login screen'
 
 const TrumpButton = ({ onPress }) => {
     const { buttonStyle, trumpHead, clickMe } = styles;
     return (
       <View>
-        <TouchableOpacity onPress={onPress} style={buttonStyle}>
+        <TouchableOpacity onPress={() => Alert.alert('fix', alertMessage)} style={buttonStyle}>
             <Image source={require('./images/trump.png')} style={trumpHead} />
             <Text style={clickMe}>
               Click Me To Sign Up | Sign In
